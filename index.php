@@ -1,3 +1,7 @@
+<?php 
+    $dataAt = date("Y-m-d");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -66,7 +70,7 @@
 
                         <div class="mb-3">
                             <label for="data" class="form-label">Data do Contato: </label>
-                            <input type="date" class="form-control" id="data" name="data" required>
+                            <input type="date" class="form-control" id="data" name="data" required max="<?= $dataAt ?>">
                         </div>
 
                         <div class="mb-3">
