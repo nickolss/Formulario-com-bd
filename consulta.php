@@ -77,6 +77,9 @@
                         $registros = $result->fetchAll();
 
                         for ($i = 0; $i < count($registros); $i++) {
+                            $data = date_create($registros[$i]['data']);
+                            $data = date_format($data , 'd/m/Y');
+
                             echo "<tr>";
                             echo "<td>" . $registros[$i]['id'] . "</td>";
                             echo "<td>" . $registros[$i]['nome'] . "</td>";
