@@ -54,7 +54,7 @@
                             <th scope="col">Origem</th>
                             <th scope="col">Data de Contato</th>
                             <th scope="col">Observação</th>
-
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,18 +75,23 @@
                         $sql = "SELECT * FROM `clientes`";
                         $result = $pdo->query($sql);
                         $registros = $result->fetchAll();
+                        
 
                         for ($i = 0; $i < count($registros); $i++) {
-                            $data = date_create($registros[$i]['data']);
+                            $data = date_create($registros[$i]['dataContato']);
                             $data = date_format($data , 'd/m/Y');
+                            $id = $registros[$i]['id'];
 
                             echo "<tr>";
-                            echo "<td>" . $registros[$i]['id'] . "</td>";
-                            echo "<td>" . $registros[$i]['nome'] . "</td>";
-                            echo "<td>" . $registros[$i]['telefone'] . "</td>";
-                            echo "<td>" . $registros[$i]['origem'] . "</td>";
-                            echo "<td>" . $registros[$i]['dataContato'] . "</td>";
-                            echo "<td>" . $registros[$i]['obser'] . "</td>";
+                                echo "<td>" . $registros[$i]['id'] . "</td>";
+                                echo "<td>" . $registros[$i]['nome'] . "</td>";
+                                echo "<td>" . $registros[$i]['telefone'] . "</td>";
+                                echo "<td>" . $registros[$i]['origem'] . "</td>";
+                                echo "<td>" . $data . "</td>";
+                                echo "<td>" . $registros[$i]['obser'] . "</td>";
+                                echo "<td>
+                                    <a href='editar.php?id=" . $registros[$i]['id'] . "'>Editar</a> 
+                                </td>";
                             echo "</tr>";
                         }
                         ?>

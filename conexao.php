@@ -18,9 +18,9 @@
         echo "Erro ao tentar fazer a conexão com MYSQL: " . $ex->getMessage();
     }
 
-    $sql = "INSERT INTO `clientes`(`nome`, `telefone`, `origem`, `dataContato`, `obser`) VALUES ('$nomeForm','$telefoneForm','$origemForm','$dataContatoForm','$observacaoForm')";
+    $sqlInserir = "INSERT INTO `clientes`(`nome`, `telefone`, `origem`, `dataContato`, `obser`) VALUES ('$nomeForm','$telefoneForm','$origemForm','$dataContatoForm','$observacaoForm')";
 
-    $cadastrarCliente = $pdo->prepare($sql);
+    $cadastrarCliente = $pdo->prepare($sqlInserir);
     $cadastrarCliente->execute();
 ?>
 
