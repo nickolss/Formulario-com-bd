@@ -90,7 +90,8 @@
                                 echo "<td>" . $data . "</td>";
                                 echo "<td>" . $registros[$i]['obser'] . "</td>";
                                 echo "<td>
-                                    <a href='editar.php?id=" . $registros[$i]['id'] . "'>Editar</a> 
+                                    <a href='editarPage.php?id=" . $registros[$i]['id'] . "'>Editar</a>
+                                    <a href='deletar.php?id=" . $registros[$i]['id'] . "'>Deletar</a> 
                                 </td>";
                             echo "</tr>";
                         }

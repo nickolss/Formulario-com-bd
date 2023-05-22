@@ -1,25 +1,19 @@
 <?php
-$nomeForm = $_POST['nome'] ?? "";
-$telefoneForm = $_POST['telefone'] ?? "";
-$origemForm = $_POST['origem'] ?? "";
-$dataContatoForm = $_POST['data'] ?? "";
-$observacaoForm = $_POST['observacao'] ?? "";
-$dataAt = date("Y-m-d");
-
-
 define('MYSQL_HOST', 'localhost:3306');
 define('MYSQL_USER', 'root');
 define('MYSQL_PASSWORD', '');
 define('MYSQL_DB_NAME', 'agendamento_clientes');
 
+//Define é uma constante de ambiente 
 try {
     $pdo = new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD); //Para criar um PDO é mysql:host'(NOME_HOST no caso localhost)';dbname='(NOME_BANCO_DADOS)' , $username, $senha
-    $sqlUpdate = $pdo->prepare("UPDATE clientes SET nome='$nomeForm' , telefone='$telefoneForm' , origem='$origemForm' , dataContato='$dataContatoForm' , obser='$observacaoForm' WHERE id=$_GET[id]");
-    $sqlUpdate->execute();
+
 } catch (PDOException $ex) {
     echo "Erro ao tentar fazer a conexão com MYSQL: " . $ex->getMessage();
 }
 
-
 $id = (int)$_GET['id'];
-
+$sqlDeletar = "DELETE FROM clientes WHERE id=$id";
+$deletar = $pdo->prepare($sqlDeletar);
+$deletar->execute();
+?>
