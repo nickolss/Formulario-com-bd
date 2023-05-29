@@ -14,12 +14,12 @@ define('MYSQL_DB_NAME', 'agendamento_clientes');
 
 try {
     $pdo = new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD); //Para criar um PDO é mysql:host'(NOME_HOST no caso localhost)';dbname='(NOME_BANCO_DADOS)' , $username, $senha
-    $sqlUpdate = $pdo->prepare("UPDATE clientes SET nome='$nomeForm' , telefone='$telefoneForm' , origem='$origemForm' , dataContato='$dataContatoForm' , obser='$observacaoForm' WHERE id=$_GET[id]");
-    $sqlUpdate->execute();
 } catch (PDOException $ex) {
     echo "Erro ao tentar fazer a conexão com MYSQL: " . $ex->getMessage();
 }
-
-
 $id = (int)$_GET['id'];
+$sqlUpdate = $pdo->prepare("UPDATE clientes SET nome='$nomeForm' , telefone='$telefoneForm' , origem='$origemForm' , dataContato='$dataContatoForm' , obser='$observacaoForm' WHERE id=$id");
 
+if($sqlUpdate->execute()){
+    header("Location: consulta.php");
+}

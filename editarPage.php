@@ -1,3 +1,22 @@
+<?php
+$id = (int) $_GET['id'];
+$sql = "SELECT * from `clientes` WHERE id=$id";
+define('MYSQL_HOST', 'localhost:3306');
+define('MYSQL_USER', 'root');
+define('MYSQL_PASSWORD', '');
+define('MYSQL_DB_NAME', 'agendamento_clientes');
+
+//Define é uma constante de ambiente 
+try {
+    $pdo = new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD); //Para criar um PDO é mysql:host'(NOME_HOST no caso localhost)';dbname='(NOME_BANCO_DADOS)' , $username, $senha
+
+} catch (PDOException $ex) {
+    echo "Erro ao tentar fazer a conexão com MYSQL: " . $ex->getMessage();
+}
+
+$result = $pdo->query($sql);
+$registros = $result->fetchAll();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -45,20 +64,20 @@
         </div>
         <div class="row">
             <div class="col formulario">
-                <form action="editar.php?id=<?=$_GET['id']?>" method="POST">
+                <form action="editar.php?id=<?= $_GET['id'] ?>" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+                        <input type="text" class="form-control" id="nome" name="nome" required value="<?= $registros[0]['nome'] ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="telefone" class="form-label">Telefone: </label>
-                        <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(XX)XXXXX-XXXX" required>
+                        <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(XX)XXXXX-XXXX" required value="<?= $registros[0]['telefone'] ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="origem" class="form-label">Origem: </label>
-                        <select class="form-select" name="origem" id="origem">
+                        <select class="form-select" name="origem" id="origem" value="<?= $registros[0]['origem'] ?>">
                             <option value="celular">Celular</option>
                             <option value="computador">Computador</option>
                             <option value="notebook">Notebook</option>
@@ -67,12 +86,12 @@
 
                     <div class="mb-3">
                         <label for="data" class="form-label">Data do Contato: </label>
-                        <input type="date" class="form-control" id="data" name="data" required max="<?= $dataAt ?>">
+                        <input type="date" class="form-control" id="data" name="data" required max="<?= $dataAt ?>" value="<?= $registros[0]['dataContato'] ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="Observacao" class="form-label">Observação:</label>
-                        <textarea class="form-control" id="observacao" rows="3" name="observacao"></textarea>
+                        <textarea class="form-control" id="observacao" rows="3" name="observacao"><?= $registros[0]['obser'] ?></textarea>
                     </div>
 
                     <input type="submit" value="Editar" name="cadastrar" id="cadastrar" class="formulario__enviar">

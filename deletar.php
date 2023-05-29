@@ -15,5 +15,7 @@ try {
 $id = (int)$_GET['id'];
 $sqlDeletar = "DELETE FROM clientes WHERE id=$id";
 $deletar = $pdo->prepare($sqlDeletar);
-$deletar->execute();
+if($deletar->execute()){
+    header("Location: consulta.php");
+}
 ?>
