@@ -48,7 +48,7 @@
         </div>
         <div class="row">
             <div class="col formulario">
-                    <form action="conexao.php" method="POST">
+                    <form action="cadastrar.php" method="POST">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome:</label>
                             <input type="text" class="form-control" id="nome" name="nome" required>
