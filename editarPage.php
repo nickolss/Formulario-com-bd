@@ -1,18 +1,9 @@
 <?php
+require_once('conexao.php');
+
 $id = (int) $_GET['id'];
 $sql = "SELECT * from `clientes` WHERE id=$id";
-define('MYSQL_HOST', 'localhost:3306');
-define('MYSQL_USER', 'root');
-define('MYSQL_PASSWORD', '');
-define('MYSQL_DB_NAME', 'agendamento_clientes');
 
-//Define é uma constante de ambiente 
-try {
-    $pdo = new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD); //Para criar um PDO é mysql:host'(NOME_HOST no caso localhost)';dbname='(NOME_BANCO_DADOS)' , $username, $senha
-
-} catch (PDOException $ex) {
-    echo "Erro ao tentar fazer a conexão com MYSQL: " . $ex->getMessage();
-}
 
 $result = $pdo->query($sql);
 $registros = $result->fetchAll();
